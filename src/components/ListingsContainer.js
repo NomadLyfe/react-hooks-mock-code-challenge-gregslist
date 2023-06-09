@@ -17,13 +17,8 @@ function ListingsContainer({ listings, setListings }) {
   }
 
   function handleSort() {
-    setListings((listings) => {
-      const sortedListings = listings.sort((a, b) => {
-        return a.location.toLowerCase().localeCompare(b.location.toLowerCase());
-      })
-      console.log(listings);
-      return sortedListings;
-    });
+    const sortedListings = listings.sort((a, b) => a.location.toLowerCase().localeCompare(b.location.toLowerCase()))
+    setListings([...sortedListings]);
   }
 
   return (

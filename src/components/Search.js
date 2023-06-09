@@ -7,13 +7,17 @@ function Search({ listings, setListings }) {
     if (searchTerm !== '') {
       const searchedListing = listings.filter((listing) => listing.description === searchTerm);
       setListings(searchedListing);
+    } else {
+      if (searchTerm === '') {
+        fetch("http://localhost:6001/listings")
+        .then(r => r.json())
+        .then(data => setListings(data));
+      };
     }
   }
 
-  if (searchTerm === '') {
-    fetch("http://localhost:6001/listings")
-    .then(r => r.json())
-    .then(data => setListings(data));
+  function handleChange(e) {
+    setSearchTerm(e.target.value);
   }
 
   return (
@@ -23,7 +27,7 @@ function Search({ listings, setListings }) {
         id="search"
         placeholder="search free stuff"
         value={searchTerm}
-        onChange={(e) => {setSearchTerm(e.target.value)}}
+        onChange={handleChange}
       />
       <button type="submit">🔍</button>
     </form>
